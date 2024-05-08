@@ -3,7 +3,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
 #    url: jdbc:mysql://localhost:3306/lakeSide_hotel_db
-    url: jdbc:mariadb://${DB_ADDRESS}/lakeSide_hotel_db
+    url: jdbc:mariadb://${DB_ADDRESS}/lakeSide_hotel_DB
 #    driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:

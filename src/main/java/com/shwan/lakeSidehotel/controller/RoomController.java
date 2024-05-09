@@ -38,7 +38,7 @@ public class RoomController {
     private final IBookingService bookingService;
 
     @PostMapping("/add/new-room")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
@@ -59,24 +59,6 @@ public class RoomController {
         return ResponseEntity.ok(roomTypes);
     }
 
-//    @GetMapping("/all-rooms")
-//    public ResponseEntity<List<RoomResponse>> getAllRooms() throws SQLException {
-//
-//        List<Room> rooms = roomService.getAllRooms();
-//        List<RoomResponse> roomResponses = new ArrayList<>();
-//
-//        for (Room room : rooms) {
-//            byte[] photoBytes = roomService.getRoomPhotoByRoomId(room.getId());
-//            if (photoBytes != null && photoBytes.length > 0) {
-//                String base64Photo = Base64.encodeBase64String(photoBytes);
-//                RoomResponse roomResponse = getRoomResponse(room);
-//                roomResponse.setPhoto(base64Photo);
-//                roomResponses.add(roomResponse);
-//            }
-//        }
-//        return ResponseEntity.ok(roomResponses);
-//    }
-
     @GetMapping("/all-rooms")
     public ResponseEntity<List<RoomResponse>> getAllRooms() {
         List<Room> rooms = roomService.getAllRooms();
@@ -89,14 +71,14 @@ public class RoomController {
     }
 
     @DeleteMapping("/delete/room/{roomId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteRoom(@PathVariable Long roomId) {
         roomService.deleteRoom(roomId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/update/{roomId}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId,
                                                    @RequestParam(required = false) String roomType,
                                                    @RequestParam(required = false) BigDecimal roomPrice,
